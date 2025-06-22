@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+
+
+
+  <script>
+    const booksUrl = 'https://moviedatabase-97ac8-default-rtdb.asia-southeast1.firebasedatabase.app/books.json';
+
+async function fetchUniqueGenres() {
+  try {
+    const res = await fetch(booksUrl);
+    const data = await res.json();
+
+    const genres = new Set();
+
+    Object.values(data).forEach(book => {
+      if (book.genre) {
+        genres.add(book.genre.trim());
+      }
+    });
+
+    console.log('📚 Unique Genres:', [...genres]);
+  } catch (err) {
+    console.error('Error fetching genres:', err);
+  }
+}
+
+fetchUniqueGenres();
+
+  </script>
+  
+</body>
+
+</html>
